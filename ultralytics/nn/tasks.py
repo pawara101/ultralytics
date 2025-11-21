@@ -92,6 +92,7 @@ from ultralytics.utils.torch_utils import (
     smart_inference_mode,
     time_sync,
 )
+from ultralytics.nn.modules.swin_transformers import SwinTransformer
 
 
 class BaseModel(torch.nn.Module):

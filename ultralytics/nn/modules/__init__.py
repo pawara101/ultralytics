@@ -101,6 +101,7 @@ from .transformer import (
     TransformerEncoderLayer,
     TransformerLayer,
 )
+from .swin_transformers import SwinTransformer  # noqa: F401
 
 __all__ = (
     "AIFI",
