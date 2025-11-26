@@ -1,0 +1,27 @@
+# model_bifpn.yaml
+nc: 12
+depth_multiple: 1.0
+width_multiple: 1.0
+
+backbone:
+  # Example backbone outputs (C3/C4/C5). Replace with your backbone layers
+  - [Conv, [3, 32, 6, 2]]        # 0
+  - [Conv, [3, 64, 3, 2]]        # 1
+  - [C3, [64, 64, 1, False]]     # 2
+  - [Conv, [3, 128, 3, 2]]       # 3
+  - [C3, [128, 128, 3, False]]   # 4
+  - [Conv, [3, 256, 3, 2]]       # 5
+  - [C3, [256, 256, 3, False]]   # 6
+
+neck:
+  # BiFPN-like neck: takes three input features (p3,p4,p5), produces fused multi-scale features
+  - [Upsample, None, 2, 1, True]    # upsample p5->p4
+  - [Concat, None, 1, 1]            # concat p4 and upsampled p5
+  - [Conv, 1, 128, 1, 1]            # reduce channels
+  - [Downsample, None, 2, 1]        # downsample fused->p5 path
+  - [Add, None, 1, 1]               # merge with original p5
+  - [Conv, 3, 256, 1, 1]            # final fused feature
+  # Repeat or add additional BiFPN levels as needed
+
+head:
+  - [Detect, nc, [256, 128, 64]]
