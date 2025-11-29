@@ -27,23 +27,23 @@ head:
   
   # Ensure P4 (layer 6) matches P5's upsampled channels (typically 512->512 is fine, but explicit Conv is safer)
   - [6, 1, Conv, [512, 1, 1]] # 10 Reduce/Align P4 channels
-  - [[-1, -2], 1, BiFPN_Add, []] # 11 Fuse P5-up + P4 (Weighted Sum)
+  - [[-1, -2], 1, BiFPN, []] # 11 Fuse P5-up + P4 (Weighted Sum)
 
   - [-1, 2, C3k2, [512, False]] # 12 Refine
 
   - [-1, 1, nn.Upsample, [None, 2, 'nearest']] # 13
   - [4, 1, Conv, [512, 1, 1]] # 14 Project P3 (from backbone) to 512 channels
-  - [[-1, -2], 1, BiFPN_Add, []] # 15 Fuse P4-up + P3 (Weighted Sum)
+  - [[-1, -2], 1, BiFPN, []] # 15 Fuse P4-up + P3 (Weighted Sum)
 
   - [-1, 2, C3k2, [256, False]] # 16 Refine (Output P3)
 
   - [-1, 1, Conv, [256, 3, 2]] # 17 Downsample
-  - [[-1, 12], 1, BiFPN_Add, []] # 18 Fuse P3-down + P4 (Weighted Sum)
+  - [[-1, 12], 1, BiFPN, []] # 18 Fuse P3-down + P4 (Weighted Sum)
   
   - [-1, 2, C3k2, [512, False]] # 19 Refine (Output P4)
 
   - [-1, 1, Conv, [512, 3, 2]] # 20 Downsample
-  - [[-1, 9], 1, BiFPN_Add, []] # 21 Fuse P4-down + P5 (Weighted Sum)
+  - [[-1, 9], 1, BiFPN, []] # 21 Fuse P4-down + P5 (Weighted Sum)
 
   - [-1, 2, C3k2, [1024, True]] # 22 Refine (Output P5)
 

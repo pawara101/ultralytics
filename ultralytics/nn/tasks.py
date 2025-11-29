@@ -93,6 +93,7 @@ from ultralytics.utils.torch_utils import (
     time_sync,
 )
 from ultralytics.nn.modules.swin_transformers import SwinTransformer
+from ultralytics.nn.modules.bifpn import BiFPN
 
 
 class BaseModel(torch.nn.Module):
