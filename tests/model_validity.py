@@ -3,7 +3,7 @@ from ultralytics import YOLO
 from PIL import Image
 from torchvision import transforms
 
-model = YOLO(r".\ultralytics\cfg\models\12\swin-t-12.yaml",task='detect',verbose=True)  # build a new model from YAML
+model = YOLO(r"D:\Research\msc_research\yolo\Ultralytics\ultralytics-101\ultralytics\ultralytics\cfg\models\12\yolo12-bifpn.yaml",verbose=True)
 
 model.info()           # non-zero FLOPs
 # _ = model(torch.randn(1,3,640,640))  # forward pass

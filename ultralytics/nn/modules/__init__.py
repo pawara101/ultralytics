@@ -102,7 +102,7 @@ from .transformer import (
     TransformerLayer,
 )
 from .swin_transformers import SwinTransformer  # noqa: F401
-from .bifpn import BiFPN  # noqa: F401
+from .bifpn import BiFPN_Concat  # noqa: F401
 
 __all__ = (
     "AIFI",
@@ -182,5 +182,5 @@ __all__ = (
     "YOLOESegment",
     "v10Detect",
     "SwinTransformer",
-    "BiFPN",
+    "BiFPN_Concat",
 )
