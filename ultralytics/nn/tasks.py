@@ -93,7 +93,7 @@ from ultralytics.utils.torch_utils import (
     time_sync,
 )
 from ultralytics.nn.modules.swin_transformers import SwinTransformer
-from ultralytics.nn.modules import BiFPN_Concat
+from ultralytics.nn.modules import BiFPNBlock
 
 
 class BaseModel(torch.nn.Module):
@@ -1648,7 +1648,7 @@ def parse_model(d, ch, verbose=True):
         elif m is SwinTransformer:
             c1, c2 = ch[f], args[0]
             args = [c1, c2, *args[1:]]
-        elif m is BiFPN_Concat:
+        elif m is BiFPNBlock:
             c2 = ch[f[0]]
         else:
             c2 = ch[f]
